@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Abhijeet Kumar — Software Engineer focused on Go, distributed systems, microservices and cloud-native platforms.">
+  <meta name="theme-color" content="#101820">
+  <title>Abhijeet Kumar | Software Engineer — Go & Distributed Systems</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101820;
+      --surface: #17232d;
+      --surface-2: #1c2b36;
+      --ink: #edf3f6;
+      --muted: #a5b5bf;
+      --line: #2a3b47;
+      --accent: #72d5c2;
+      --accent-ink: #09211d;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font: 16px/1.7 var(--sans); -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-underline-offset: 4px; }
+    a:hover { color: #a0eadc; }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+    .wrap { width: min(1060px, calc(100% - 44px)); margin: 0 auto; }
+    .top {
+      min-height: 76px; display: flex; align-items: center; justify-content: space-between;
+      gap: 24px; border-bottom: 1px solid var(--line);
+    }
+    .brand { color: var(--ink); text-decoration: none; font-weight: 750; letter-spacing: -.03em; }
+    nav { display: flex; flex-wrap: wrap; gap: 22px; }
+    nav a { color: var(--muted); font-size: .92rem; text-decoration: none; }
+    nav a:hover { color: var(--ink); }
+    .hero {
+      display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr);
+      align-items: center; gap: 54px; padding: 88px 0 92px;
+    }
+    .eyebrow {
+      color: var(--accent); font:  .82rem var(--mono); letter-spacing: .08em;
+      text-transform: uppercase; margin: 0 0 18px;
+    }
+    h1 { max-width: 760px; font-size: clamp(2.7rem, 6vw, 4.8rem); line-height: 1.04; letter-spacing: -.065em; margin: 0 0 24px; }
+    .lede { max-width: 650px; color: var(--muted); font-size: 1.12rem; margin: 0 0 30px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 44px;
+      padding: 10px 17px; border: 1px solid var(--accent); border-radius: 7px;
+      text-decoration: none; font-weight: 700; font-size: .92rem;
+    }
+    .button.primary { background: var(--accent); color: var(--accent-ink); }
+    .button.secondary { color: var(--accent); }
+    .button:hover { transform: translateY(-1px); }
+    .terminal {
+      background: #091117; border: 1px solid #263944; border-radius: 12px;
+      padding: 19px 20px 21px; color: #c6d9df; font: .78rem/1.95 var(--mono);
+      box-shadow: 0 22px 65px #0003; overflow: hidden;
+    }
+    .terminal-head { display: flex; align-items: center; gap: 7px; color: #8096a1; margin-bottom: 14px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #47606d; }
+    .terminal-line { white-space: nowrap; }
+    .terminal .ok { color: #72d5a8; }
+    .terminal .dim { color: #78909c; }
+    section { padding: 68px 0; border-top: 1px solid var(--line); }
+    .section-head { margin-bottom: 32px; }
+    h2 { margin: 0 0 8px; font-size: clamp(1.8rem, 3vw, 2.25rem); letter-spacing: -.045em; }
+    .section-intro { margin: 0; color: var(--muted); max-width: 680px; }
+    .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 30px 0 40px; }
+    .metric { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 19px; }
+    .metric strong { display: block; font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -.05em; line-height: 1.2; }
+    .metric span { display: block; margin-top: 7px; color: var(--muted); font-size: .84rem; }
+    .work-item { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 25px; padding: 27px 0; border-top: 1px solid var(--line); }
+    .work-item:first-of-type { border-top: 0; }
+    .work-label { color: var(--accent); font: .83rem var(--mono); padding-top: 4px; }
+    h3 { margin: 0 0 9px; font-size: 1.2rem; letter-spacing: -.025em; }
+    .work-item p, .project p { margin: 0 0 12px; color: var(--muted); }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 15px; }
+    .tags span {
+      border: 1px solid var(--line); color: #b5c5cd; border-radius: 99px;
+      padding: 3px 9px; font-size: .76rem;
+    }
+    .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .project {
+      background: var(--surface); border: 1px solid var(--line); border-radius: 11px;
+      padding: 24px; display: flex; flex-direction: column; align-items: flex-start;
+    }
+    .project h3 a { color: var(--ink); text-decoration-color: var(--accent); }
+    .project p { font-size: .94rem; }
+    .project .tags { margin-top: auto; padding-top: 5px; }
+    .project.featured { grid-column: 1 / -1; background: linear-gradient(135deg, var(--surface), #1a3038); }
+    .project.featured p { max-width: 850px; }
+    .project-link { display: inline-block; margin-top: 12px; font-size: .9rem; font-weight: 650; }
+    .stack { display: grid; grid-template-columns: 165px 1fr; gap: 15px 26px; margin: 0; }
+    .stack dt { font-weight: 700; }
+    .stack dd { margin: 0; color: var(--muted); }
+    .contact-panel {
+      background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+      padding: clamp(24px, 5vw, 42px);
+    }
+    .contact-panel p { color: var(--muted); max-width: 650px; margin: 0 0 23px; }
+    footer { padding: 27px 0 42px; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
+    .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    @media (max-width: 780px) {
+      .hero { grid-template-columns: 1fr; gap: 32px; padding: 65px 0; }
+      .terminal { max-width: 560px; width: 100%; }
+      .metrics { grid-template-columns: repeat(2, 1fr); }
+      .work-item { grid-template-columns: 1fr; gap: 8px; }
+    }
+    @media (max-width: 560px) {
+      .wrap { width: min(100% - 32px, 1060px); }
+      .top { align-items: flex-start; flex-direction: column; padding: 18px 0; gap: 12px; }
+      nav { gap: 15px; }
+      .project-grid { grid-template-columns: 1fr; }
+      .project.featured { grid-column: auto; }
+      .stack { grid-template-columns: 1fr; gap: 3px; }
+      .stack dd { margin-bottom: 11px; }
+      section { padding: 52px 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="#">Abhijeet Kumar</a>
+      <nav aria-label="Main navigation">
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#stack">Tech stack</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" style="border-top:0">
+        <div>
+          <p class="eyebrow">Software Engineer · Bengaluru, India</p>
+          <h1>I build reliable, scalable backend systems.</h1>
+          <p class="lede">
+            Software Engineer with 4+ years of experience designing and scaling production
+            distributed systems and microservices. I work primarily with Go, event-driven
+            architecture and cloud-native infrastructure, with production experience in
+            platforms supporting more than 15,000 EV chargers.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="#experience">Explore my work</a>
+            <a class="button secondary" href="https://github.com/abhijeetkr0202" target="_blank" rel="noopener noreferrer">GitHub profile</a>
+            <a class="button secondary" href="https://www.linkedin.com/in/abhijeetkr0202/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </div>
+        </div>
+
+        <div class="terminal" aria-label="Illustrative OCPP charging session log">
+          <div class="terminal-head"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span style="margin-left:7px">ocpp-session.log</span></div>
+          <div class="terminal-line dim">[gateway] connection established</div>
+          <div class="terminal-line">BootNotification <span class="ok">Accepted</span></div>
+          <div class="terminal-line">StatusNotification <span class="ok">Available</span></div>
+          <div class="terminal-line">Authorize <span class="ok">Accepted</span></div>
+          <div class="terminal-line">StartTransaction <span class="ok">txId: 4021</span></div>
+          <div class="terminal-line">MeterValues 7.2 kW</div>
+          <div class="terminal-line">MeterValues 7.1 kW</div>
+          <div class="terminal-line">StopTransaction <span class="ok">Accepted</span></div>
+          <div class="terminal-line dim">[worker] charge detail record queued</div>
+        </div>
+      </section>
+
+      <section id="experience">
+        <div class="section-head">
+          <p class="eyebrow">01 / Production engineering</p>
+          <h2>Experience at scale</h2>
+          <p class="section-intro">
+            At Ford, I work on backend services and platform architecture for EV charging
+            infrastructure, with a focus on scalability, concurrency and production ownership.
+          </p>
+        </div>
+
+        <div class="metrics" aria-label="Selected engineering impact">
+          <div class="metric"><strong>15,000+</strong><span>chargers supported by the platform</span></div>
+          <div class="metric"><strong>8,200+</strong><span>chargers migrated</span></div>
+          <div class="metric"><strong>2,150+</strong><span>legacy servers decommissioned</span></div>
+          <div class="metric"><strong>$9K</strong><span>approx. monthly infrastructure savings</span></div>
+        </div>
+
+        <article class="work-item">
+          <div class="work-label">FORD MOTOR COMPANY<br>JUL 2022 — PRESENT</div>
+          <div>
+            <h3>OCPP Gateway — multi-tenant platform</h3>
+            <p>
+              Contributed to migrating the OCPP Gateway from a single-tenant to a multi-tenant
+              architecture, improving scalability and resource utilisation while reducing
+              infrastructure costs by approximately 40%. Played a key role in the charger
+              migration, helping move 8,200+ chargers and decommission 2,150+ legacy servers.
+            </p>
+            <div class="tags"><span>Go</span><span>Kafka</span><span>Kubernetes</span><span>AWS</span><span>WebSockets</span><span>Multi-tenancy</span></div>
+          </div>
+        </article>
+
+        <article class="work-item">
+          <div class="work-label">REAL-TIME CONNECTIVITY</div>
+          <div>
+            <h3>Go services for OCPP charger communication</h3>
+            <p>
+              Designed and implemented OCPP Gateway microservice features in Go, using
+              goroutines and channels to handle concurrent WebSocket connections and
+              real-time message streams from a platform supporting 15,000+ EV chargers.
+              Also built and consumed REST APIs across charger and charge-management services.
+            </p>
+            <div class="tags"><span>Golang</span><span>Concurrency</span><span>Goroutines</span><span>Channels</span><span>REST APIs</span></div>
+          </div>
+        </article>
+
+        <article class="work-item">
+          <div class="work-label">CDR PROCESSING</div>
+          <div>
+            <h3>CDR Cyclic Worker — processing and publishing</h3>
+            <p>
+              Own end-to-end development and production support of a Go service that processes
+              completed-charge records. The design allows multiple replicas to process CDRs
+              concurrently while controlling publishing so only one replica publishes from
+              the relevant collection at a time. Uses Go concurrency patterns and worker pools
+              to scale record processing.
+            </p>
+            <div class="tags"><span>Go</span><span>MongoDB</span><span>Worker pools</span><span>Concurrency</span><span>Production ownership</span></div>
+          </div>
+        </article>
+
+        <article class="work-item">
+          <div class="work-label">TEST AUTOMATION</div>
+          <div>
+            <h3>GOS Global OCPP Simulator</h3>
+            <p>
+              Led development of major components of the simulator, implementing protocol
+              features and backend services to replicate EV charging behaviour using OCPP 1.6
+              and OCPP 2.0.1. Reduced testing time by 50% and removed dependency on physical
+              charging hardware for the covered test scenarios.
+            </p>
+            <div class="tags"><span>Go</span><span>OCPP 1.6</span><span>OCPP 2.0.1</span><span>Testing infrastructure</span></div>
+          </div>
+        </article>
+
+        <article class="work-item">
+          <div class="work-label">EARLIER EXPERIENCE<br>INTUGINE TECHNOLOGIES</div>
+          <div>
+            <h3>Backend & Full-stack Developer Intern</h3>
+            <p>
+              Built an automated reporting solution using JavaScript, Serverless, AWS Lambda,
+              PostgreSQL, S3 and Chart.js for products serving 50+ clients. Configurable reports
+              reduced reporting effort for customer support and operations teams by over 90%.
+              Also worked on MQTT integrations, AWS SNS alerts and React component tooling.
+            </p>
+            <div class="tags"><span>JavaScript</span><span>AWS Lambda</span><span>PostgreSQL</span><span>S3</span><span>MQTT</span><span>React</span></div>
+          </div>
+        </article>
+      </section>
+
+      <section id="projects">
+        <div class="section-head">
+          <p class="eyebrow">02 / Independent work</p>
+          <h2>Projects</h2>
+          <p class="section-intro">
+            Projects where I explore system architecture, Go concurrency and practical product engineering.
+          </p>
+        </div>
+
+        <div class="project-grid">
+          <article class="project featured">
+            <p class="eyebrow">Featured project</p>
+            <h3><a href="https://github.com/abhijeetkr0202/TripBeacon-trip-planning" target="_blank" rel="noopener noreferrer">TripBeacon</a> — AI road-trip planner</h3>
+            <p>
+              A multi-service trip-planning product with a Go computation engine, a NestJS
+              API gateway and a React Native mobile app. The Go service handles geocoding,
+              multi-leg and round-trip route computation, and polyline merging. Route legs
+              are processed in parallel using goroutines and channels. The project is in
+              active development.
+            </p>
+            <div class="tags"><span>Go</span><span>Gin</span><span>Goroutines</span><span>NestJS</span><span>TypeScript</span><span>MongoDB</span><span>React Native</span></div>
+            <a class="project-link" href="https://github.com/abhijeetkr0202/TripBeacon-trip-planning" target="_blank" rel="noopener noreferrer">View repository →</a>
+          </article>
+
+          <article class="project">
+            <h3><a href="https://github.com/abhijeetkr0202/DesignGrill" target="_blank" rel="noopener noreferrer">DesignGrill</a></h3>
+            <p>
+              An open-source, local-first desktop application for practising system design
+              interviews. It supports structured interview sessions, architecture design
+              workflows and AI interviewer integrations with multiple model providers.
+            </p>
+            <div class="tags"><span>Tauri 2</span><span>React</span><span>TypeScript</span><span>SQLite</span><span>Rust</span><span>Vitest</span></div>
+            <a class="project-link" href="https://github.com/abhijeetkr0202/DesignGrill" target="_blank" rel="noopener noreferrer">View repository →</a>
+          </article>
+
+          <article class="project">
+            <h3><a href="https://github.com/abhijeetkr0202/go-csv-processor" target="_blank" rel="noopener noreferrer">Go CSV Processor</a></h3>
+            <p>
+              Explores large-file CSV processing through a baseline implementation, buffered
+              I/O, concurrent worker pools and benchmarks comparing the approaches.
+            </p>
+            <div class="tags"><span>Go</span><span>Buffered I/O</span><span>Worker pools</span><span>Benchmarking</span></div>
+            <a class="project-link" href="https://github.com/abhijeetkr0202/go-csv-processor" target="_blank" rel="noopener noreferrer">View repository →</a>
+          </article>
+
+          <article class="project">
+            <h3><a href="https://github.com/abhijeetkr0202/game-of-life-go" target="_blank" rel="noopener noreferrer">Game of Life — Go</a></h3>
+            <p>
+              Conway’s Game of Life implemented in Go, organised into packages with
+              table-driven tests and a focus on maintainable code structure.
+            </p>
+            <div class="tags"><span>Go</span><span>Package design</span><span>Testing</span></div>
+            <a class="project-link" href="https://github.com/abhijeetkr0202/game-of-life-go" target="_blank" rel="noopener noreferrer">View repository →</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="stack">
+        <div class="section-head">
+          <p class="eyebrow">03 / Tools and technologies</p>
+          <h2>Technical stack</h2>
+          <p class="section-intro">Technologies I have used across production systems and personal projects.</p>
+        </div>
+        <dl class="stack">
+          <dt>Languages</dt><dd>Go, TypeScript, JavaScript, Python</dd>
+          <dt>Backend</dt><dd>NestJS, Node.js, Express.js, Flask, REST APIs, WebSockets</dd>
+          <dt>Databases</dt><dd>MongoDB, PostgreSQL, Redis, SQLite</dd>
+          <dt>Cloud & infrastructure</dt><dd>AWS, Docker, Kubernetes, CI/CD</dd>
+          <dt>Messaging</dt><dd>Kafka, AWS SNS, MQTT</dd>
+          <dt>Engineering</dt><dd>Distributed systems, event-driven architecture, concurrency, microservices, high availability, system design</dd>
+          <dt>Observability & tools</dt><dd>Datadog, Dynatrace, Git, Jira</dd>
+          <dt>Protocols</dt><dd>OCPP 1.6, OCPP 2.0.1, OCPI</dd>
+        </dl>
+      </section>
+
+      <section id="contact">
+        <div class="contact-panel">
+          <p class="eyebrow">04 / Contact</p>
+          <h2>Let's build something reliable.</h2>
+          <p>
+            I’m interested in backend engineering, Go, distributed systems and platform
+            engineering opportunities. Feel free to reach out to discuss engineering roles
+            or the systems and projects featured here.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="mailto:abhijeetkr0202@gmail.com">Email me</a>
+            <a class="button secondary" href="https://www.linkedin.com/in/abhijeetkr0202/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a class="button secondary" href="https://github.com/abhijeetkr0202" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <span>© <span id="year"></span> Abhijeet Kumar</span>
+        <span>Bengaluru, India · <a href="https://github.com/abhijeetkr0202" target="_blank" rel="noopener noreferrer">@abhijeetkr0202</a></span>
+      </div>
+    </footer>
+  </div>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
