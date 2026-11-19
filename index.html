@@ -153,6 +153,7 @@
           </p>
           <div class="actions">
             <a class="button primary" href="#experience">Explore my work</a>
+            <a class="button secondary" href="resume.pdf" download>Download resume</a>
             <a class="button secondary" href="https://github.com/abhijeetkr0202" target="_blank" rel="noopener noreferrer">GitHub profile</a>
             <a class="button secondary" href="https://www.linkedin.com/in/abhijeetkr0202/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </div>
@@ -177,27 +178,29 @@
           <p class="eyebrow">01 / Production engineering</p>
           <h2>Experience at scale</h2>
           <p class="section-intro">
-            At Ford, I work on backend services and platform architecture for EV charging
-            infrastructure, with a focus on scalability, concurrency and production ownership.
+            At Ford, I build and run backend services for EV charging infrastructure: the
+            real-time gateway that talks to the chargers, the pipelines that process charge
+            records, and the protocol and test tooling around them.
           </p>
         </div>
 
         <div class="metrics" aria-label="Selected engineering impact">
-          <div class="metric"><strong>15,000+</strong><span>chargers supported by the platform</span></div>
-          <div class="metric"><strong>8,200+</strong><span>chargers migrated</span></div>
+          <div class="metric"><strong>~10.7M</strong><span>OCPP frames logged per day (requests and confirmations counted separately)</span></div>
+          <div class="metric"><strong>~1,140</strong><span>peak frames/sec in the last 24-hour window</span></div>
+          <div class="metric"><strong>8,200+</strong><span>chargers migrated to multi-tenant</span></div>
           <div class="metric"><strong>2,150+</strong><span>legacy servers decommissioned</span></div>
-          <div class="metric"><strong>$9K</strong><span>approx. monthly infrastructure savings</span></div>
         </div>
 
         <article class="work-item">
-          <div class="work-label">FORD MOTOR COMPANY<br>JUL 2022 — PRESENT</div>
+          <div class="work-label">SOFTWARE ENGINEER<br>FORD MOTOR COMPANY<br>JUL 2022 — PRESENT</div>
           <div>
-            <h3>OCPP Gateway — multi-tenant platform</h3>
+            <h3>OCPP Gateway — multi-tenant migration</h3>
+            <!-- TODO (optional, strengthens ownership): add one sentence on what YOU built, e.g. tenant-aware routing, consumer-group design, migration tooling, rollback plan. -->
             <p>
-              Contributed to migrating the OCPP Gateway from a single-tenant to a multi-tenant
-              architecture, improving scalability and resource utilisation while reducing
-              infrastructure costs by approximately 40%. Played a key role in the charger
-              migration, helping move 8,200+ chargers and decommission 2,150+ legacy servers.
+              Worked on moving the OCPP Gateway from a single-tenant deployment per customer to
+              a shared, Kafka-based multi-tenant platform, and on the phased migration of
+              8,200+ chargers that let us decommission 2,150+ legacy servers. Infrastructure
+              cost dropped by approximately 40% (about $9K per month).
             </p>
             <div class="tags"><span>Go</span><span>Kafka</span><span>Kubernetes</span><span>AWS</span><span>WebSockets</span><span>Multi-tenancy</span></div>
           </div>
@@ -208,12 +211,13 @@
           <div>
             <h3>Go services for OCPP charger communication</h3>
             <p>
-              Designed and implemented OCPP Gateway microservice features in Go, using
-              goroutines and channels to handle concurrent WebSocket connections and
-              real-time message streams from a platform supporting 15,000+ EV chargers.
-              Also built and consumed REST APIs across charger and charge-management services.
+              Designed and built Go features in the OCPP Gateway that keep persistent WebSocket
+              connections open to a fleet of 15,000+ chargers, using goroutines and channels for
+              concurrent connection and message handling. The gateway logs ~10.7M OCPP frames a
+              day (requests and confirmations counted separately): ~124 frames/sec on average,
+              peaking at ~1,140 frames/sec, with a p99 gateway span duration of ~87 ms.
             </p>
-            <div class="tags"><span>Golang</span><span>Concurrency</span><span>Goroutines</span><span>Channels</span><span>REST APIs</span></div>
+            <div class="tags"><span>Go</span><span>Goroutines</span><span>Channels</span><span>WebSockets</span></div>
           </div>
         </article>
 
@@ -222,54 +226,26 @@
           <div>
             <h3>CDR Cyclic Worker — processing and publishing</h3>
             <p>
-              Own end-to-end development and production support of a Go service that processes
-              completed-charge records. The design allows multiple replicas to process CDRs
-              concurrently while controlling publishing so only one replica publishes from
-              the relevant collection at a time. Uses Go concurrency patterns and worker pools
-              to scale record processing.
+              Own, end to end, a Go service that processes and publishes completed-charge
+              records (~6,000 a day). It runs as multiple replicas with a lock so exactly one
+              replica publishes from a given collection at a time, and a worker pool scales the
+              processing. Graceful shutdown means no record is lost during deploys, and I handle
+              its production support.
             </p>
-            <div class="tags"><span>Go</span><span>MongoDB</span><span>Worker pools</span><span>Concurrency</span><span>Production ownership</span></div>
-          </div>
-        </article>
-
-        <article class="work-item">
-          <div class="work-label">SERVICE INTEGRATION</div>
-          <div>
-            <h3>Charger Service &amp; Charge Management System</h3>
-            <p>
-              Built and consumed REST APIs across Charger Service and Charge Management
-              System, integrating backend capabilities across the EV charging platform and
-              supporting communication between platform services.
-            </p>
-            <div class="tags"><span>Go</span><span>REST APIs</span><span>Microservices</span><span>Service integration</span></div>
+            <div class="tags"><span>Go</span><span>MongoDB</span><span>Worker pools</span><span>Leader election</span><span>Production ownership</span></div>
           </div>
         </article>
 
         <article class="work-item">
           <div class="work-label">PROTOCOL ENGINEERING</div>
           <div>
-            <h3>OCPP &amp; OCPI protocol implementation</h3>
+            <h3>OCPP &amp; OCPI protocol engineering</h3>
             <p>
-              Worked on microservices implementing OCPP 1.6 and OCPI, along with key
-              OCPP 2.0.1 features. Collaborated with hardware and firmware teams to validate
-              cloud capabilities against physical chargers, verify protocol compliance and
-              support integration of new charger models.
+              Implemented OCPP 1.6 and OCPI microservices plus key OCPP 2.0.1 features. Worked
+              with hardware and firmware teams to validate protocol compliance against physical
+              chargers and supported the onboarding of new charger models.
             </p>
-            <div class="tags"><span>OCPP 1.6</span><span>OCPP 2.0.1</span><span>OCPI</span><span>Hardware integration</span><span>Firmware validation</span></div>
-          </div>
-        </article>
-
-        <article class="work-item">
-          <div class="work-label">OPERATIONS CONSOLE</div>
-          <div>
-            <h3>Operations Console — Services page</h3>
-            <p>
-              Owned the Services page of the Operations Console, delivering charger
-              configuration and control capabilities and supporting backend communication
-              workflows used in charger operations. The work addressed operational and
-              support requirements raised through L3 support.
-            </p>
-            <div class="tags"><span>Backend integration</span><span>Charger operations</span><span>Configuration</span><span>Service ownership</span></div>
+            <div class="tags"><span>OCPP 1.6</span><span>OCPP 2.0.1</span><span>OCPI</span><span>Firmware validation</span></div>
           </div>
         </article>
 
@@ -277,20 +253,36 @@
           <div class="work-label">TEST AUTOMATION</div>
           <div>
             <h3>GOS Global OCPP Simulator</h3>
+            <!-- TODO (optional): add the before/after test time and how the 50% was measured. -->
             <p>
-              Led development of major components of the simulator, implementing protocol
-              features and backend services to replicate EV charging behaviour using OCPP 1.6
-              and OCPP 2.0.1. Reduced testing time by 50% and removed dependency on physical
-              charging hardware for the covered test scenarios.
+              Led development of major components of a simulator that reproduces EV charging
+              behaviour over OCPP 1.6 and 2.0.1. Cut testing time by 50% and removed the need
+              for physical charging hardware across the covered test scenarios.
             </p>
-            <div class="tags"><span>Go</span><span>OCPP 1.6</span><span>OCPP 2.0.1</span><span>Testing infrastructure</span></div>
+            <div class="tags"><span>Go</span><span>OCPP 1.6</span><span>OCPP 2.0.1</span><span>Test infrastructure</span></div>
           </div>
         </article>
 
         <article class="work-item">
+          <div class="work-label">PLATFORM SERVICES</div>
+          <div>
+            <h3>Multiple core services across the platform</h3>
+            <p>
+              Worked across several core services of the charging platform. In the Charger
+              Service and Charge Management System I built and consumed REST APIs that connect
+              charger operations to the rest of the platform. I also owned the Services page of
+              the Operations Console, delivering charger configuration and remote-control
+              features driven by L3 support requirements.
+            </p>
+            <div class="tags"><span>Go</span><span>REST APIs</span><span>Microservices</span><span>Operations Console</span></div>
+          </div>
+        </article>
+
+        <article class="work-item">
+          <!-- TODO: add internship dates under the company name, e.g. <br>MON YYYY — MON YYYY -->
           <div class="work-label">EARLIER EXPERIENCE<br>INTUGINE TECHNOLOGIES</div>
           <div>
-            <h3>Backend & Full-stack Developer Intern</h3>
+            <h3>Backend &amp; Full-stack Developer Intern</h3>
             <p>
               Built an automated reporting solution using JavaScript, Serverless, AWS Lambda,
               PostgreSQL, S3 and Chart.js for products serving 50+ clients. Configurable reports
@@ -317,11 +309,13 @@
             <p class="eyebrow">Featured project</p>
             <h3><a href="https://github.com/abhijeetkr0202/TripBeacon-trip-planning" target="_blank" rel="noopener noreferrer">TripBeacon</a> — AI road-trip planner</h3>
             <p>
-              A multi-service trip-planning product with a Go computation engine, a NestJS
-              API gateway and a React Native mobile app. The Go service handles geocoding,
-              multi-leg and round-trip route computation, and polyline merging. Route legs
-              are processed in parallel using goroutines and channels. The project is in
-              active development.
+              One product built as three services. A Go computation engine (Gin) geocodes places,
+              computes multi-leg and round-trip routes, merges polylines and resolves each route
+              leg in parallel with goroutines and channels, behind swappable routing providers.
+              A NestJS gateway handles JWT auth (including Apple and Google sign-in), MongoDB
+              persistence and trip operations, and a React Native app brings it to iOS and
+              Android. In active development: routing providers (OSRM, Google Maps), weather
+              along the route, budget breakdown, safety scoring and LLM trip narratives are next.
             </p>
             <div class="tags"><span>Go</span><span>Gin</span><span>Goroutines</span><span>NestJS</span><span>TypeScript</span><span>MongoDB</span><span>React Native</span></div>
             <a class="project-link" href="https://github.com/abhijeetkr0202/TripBeacon-trip-planning" target="_blank" rel="noopener noreferrer">View repository →</a>
@@ -330,11 +324,14 @@
           <article class="project">
             <h3><a href="https://github.com/abhijeetkr0202/DesignGrill" target="_blank" rel="noopener noreferrer">DesignGrill</a></h3>
             <p>
-              An open-source, local-first desktop application for practising system design
-              interviews. It supports structured interview sessions, architecture design
-              workflows and AI interviewer integrations with multiple model providers.
+              An open-source, local-first desktop app where you write requirements and draw an
+              architecture, and an AI interviewer challenges your actual design from a
+              structured, validated snapshot of your session. Ships with 50 problems and a
+              progressive interview that moves from baseline to scale to resilience, asking what
+              breaks first. Works with OpenAI, Anthropic, OpenRouter or any OpenAI-compatible
+              endpoint, with API keys kept in the OS credential store.
             </p>
-            <div class="tags"><span>Tauri 2</span><span>React</span><span>TypeScript</span><span>SQLite</span><span>Rust</span><span>Vitest</span></div>
+            <div class="tags"><span>Tauri 2</span><span>React</span><span>TypeScript</span><span>SQLite</span><span>Rust</span><span>Vitest</span><span>Built with AI-assisted development</span></div>
             <a class="project-link" href="https://github.com/abhijeetkr0202/DesignGrill" target="_blank" rel="noopener noreferrer">View repository →</a>
           </article>
 
@@ -360,6 +357,9 @@
         </div>
       </section>
 
+      <!-- TODO: add an Education line before the stack section, e.g.
+      <section id="education"><div class="section-head"><h2>Education</h2></div><p>DEGREE, COLLEGE · YEAR</p></section> -->
+
       <section id="stack">
         <div class="section-head">
           <p class="eyebrow">03 / Tools and technologies</p>
@@ -370,10 +370,10 @@
           <dt>Languages</dt><dd>Go, TypeScript, JavaScript, Python</dd>
           <dt>Backend</dt><dd>NestJS, Node.js, Express.js, Flask, REST APIs, WebSockets</dd>
           <dt>Databases</dt><dd>MongoDB, PostgreSQL, Redis, SQLite</dd>
-          <dt>Cloud & infrastructure</dt><dd>AWS, Docker, Kubernetes, CI/CD</dd>
+          <dt>Cloud &amp; infrastructure</dt><dd>AWS, Docker, Kubernetes, CI/CD</dd>
           <dt>Messaging</dt><dd>Kafka, AWS SNS, MQTT</dd>
           <dt>Engineering</dt><dd>Distributed systems, event-driven architecture, concurrency, microservices, high availability, system design</dd>
-          <dt>Observability & tools</dt><dd>Datadog, Dynatrace, Git, Jira</dd>
+          <dt>Observability &amp; tools</dt><dd>Datadog, Dynatrace, Git, Jira</dd>
           <dt>Protocols</dt><dd>OCPP 1.6, OCPP 2.0.1, OCPI</dd>
         </dl>
       </section>
@@ -389,6 +389,7 @@
           </p>
           <div class="actions">
             <a class="button primary" href="mailto:abhijeetkr0202@gmail.com">Email me</a>
+            <a class="button secondary" href="resume.pdf" download>Download resume</a>
             <a class="button secondary" href="https://www.linkedin.com/in/abhijeetkr0202/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             <a class="button secondary" href="https://github.com/abhijeetkr0202" target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
